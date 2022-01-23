@@ -19,20 +19,25 @@ server <- function(input, output, session) {
       addProviderTiles(
         "CartoDB.DarkMatter",
         options = tileOptions(minZoom = 10, maxZoom = 20)) |>
+      addPolygons(data = alcaldias_longlat, opacity = 0.2) |> 
       addCircles(
         data = puntos(),
         lng = ~longitude,
         lat = ~latitude,
-        color = ~paleta(lugar)
+        color = ~paleta(lugar),
+        popup = paste0(
+          "<strong>Nombre:</strong> ", puntos()$nombre, "<br>",
+          "<strong>Colonia:</strong> ", puntos()$colonia, "<br>",
+          "<strong>Calle y número:</strong> ", puntos()$calle_numero
+        )
       ) |>
-      addPolygons(data = alcaldias_longlat, opacity = 0.2, popup = ~nomgeo) |>
       addLegend("bottomright", pal = paleta, values = ~lugar)
   })
 
   output$conteosPlot <- renderEcharts4r({
     puntos_alc <- puntos() |>
       count(alcaldia, lugar) |> 
-      arrange(desc(alcaldia)) |> 
+      arrange(alcaldia) |> 
       group_by(lugar)
     
     puntos_alc |>
@@ -50,12 +55,11 @@ server <- function(input, output, session) {
         splitArea = list(show = FALSE),
         splitLine = list(show = FALSE)
       ) |> 
-      e_flip_coords() |> 
       e_toolbox_feature(
         feature = "saveAsImage",
         title = "Guardar como imágen"
-      )
-
+      ) |> 
+      e_x_axis(axisLabel = list(interval = 0, rotate = 45))
   })
 
 }

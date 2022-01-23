@@ -6,6 +6,7 @@ library(leaflet)
 library(scales)
 library(echarts4r)
 library(ggdark)
+library(fontawesome)
 
 #Importa datos
 load("datos/puntos-culturales-cdmx.RData")
@@ -34,14 +35,14 @@ ui <- fluidPage(
     ),
     actionButton(inputId = "mostrar", "Mostrar"),
     br(), br(),
-    div(style="color: gray; width: 335px; align: left; margin-left: -5px;",
-        a(strong("Hecho por Angel Escalante"), href = "https://github.com/AFEScalante/")
+    div(style="color: white; width: 335px; align: left; margin-left: -5px;",
+        a(fa("github", fill = "white", height = "2em"), href = "https://github.com/AFEScalante/culturapp")
     ),
     align = "center", width = 4
   ),
   column(
-    leafletOutput("mapa", width = 830, height = 500),
-    echarts4rOutput("conteosPlot", width = 830, height = 380),
+    leafletOutput("mapa", width = 930, height = 500),
+    echarts4rOutput("conteosPlot", width = 930, height = 320),
     width = 8,
     align = "right"
   )
