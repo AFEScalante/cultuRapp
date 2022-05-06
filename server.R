@@ -1,6 +1,6 @@
 server <- function(input, output, session) {
   load("datos/puntos-culturales-cdmx.RData") #Importa datos
-  alcaldias_cdmx <- st_read("datos/alcaldias/") #Lectura mapa alcaldías
+  alcaldias_cdmx <- st_read(here("datos", "alcaldias")) #Lectura mapa alcaldías
   alcaldias_longlat <- alcaldias_cdmx |> st_transform(crs = 4326) #Trans para leaflet
   alcaldias_longlat$nomgeo[c(2, 4, 5, 12, 16)] <- #Limpia nombre de alcaldías
     c("Cuauthémoc", "Álvaro Obregon", "Coyoacán", "Benito Juárez", "Tláhuac")
