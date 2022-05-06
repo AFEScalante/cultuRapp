@@ -1,0 +1,13 @@
+name: cultuRapp
+title: cultuRapp
+username:
+account: angelfer
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6249282
+bundleId: 5878093
+url: https://angelfer.shinyapps.io/cultuRapp/
+when: 1651851843.33511
+lastSyncTime: 1651851843.33511
+asMultiple: FALSE
+asStatic: FALSE
